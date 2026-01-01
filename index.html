@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lucca Assistent - Atendimento</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .chat-container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      height: 80vh;
+    }
+    .chat-header {
+      background: #111827;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+    }
+    .message {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      max-width: 80%;
+      font-size: 14px;
+    }
+    .bot {
+      background: #e5e7eb;
+      align-self: flex-start;
+    }
+    .user {
+      background: #2563eb;
+      color: #fff;
+      align-self: flex-end;
+    }
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      outline: none;
+    }
+    .chat-input button {
+      padding: 12px 16px;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="chat-container">
+  <div class="chat-header">
+    Atendimento Automático
+  </div>
+
+  <div class="chat-messages" id="messages">
+    <div class="message bot">
+      Olá 👋 Sou o assistente virtual.<br>
+      Como posso te ajudar hoje?
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input type="text" id="input" placeholder="Digite sua mensagem..." />
+    <button onclick="sendMessage()">Enviar</button>
+  </div>
+</div>
+
+<script>
+  function sendMessage() {
+    const input = document.getElementById("input");
+    const text = input.value.trim();
+    if (!text) return;
+
+    const messages = document.getElementById("messages");
+
+    const userMsg = document.createElement("div");
+    userMsg.className = "message user";
+    userMsg.innerText = text;
+    messages.appendChild(userMsg);
+
+    input.value = "";
+    messages.scrollTop = messages.scrollHeight;
+
+    setTimeout(() => {
+      const botMsg = document.createElement("div");
+      botMsg.className = "message bot";
+      botMsg.innerText = "Recebi sua mensagem 😊 Em breve vou te ajudar com o atendimento.";
+      messages.appendChild(botMsg);
+      messages.scrollTop = messages.scrollHeight;
+    }, 800);
+  }
+</script>
+
+</body>
+</html>
